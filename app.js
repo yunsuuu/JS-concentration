@@ -1,7 +1,10 @@
 const $wrapper = document.querySelector("#wrapper");
 
-const total = 12; // 12개의 랜덤한 카드
-const colors = ['red', 'orange', 'yellow', 'green', 'white', 'pink'];
+const total = parseInt(prompt("카드 개수를 짝수로 입력하세요!(최대 20)"));
+const colors = [
+  'red', 'orange', 'yellow', 'green', 'white',
+  'pink','cyan', 'violet', 'gray', 'black',
+];
 // 앞면 색상 6, 뒷면 남색으로 통일
 let colorCopy = colors.concat(colors);
 // concat = 원본 수정 없이 새로운 배열 생성
@@ -50,7 +53,7 @@ const onClickCard = (e) => {
   // 뒤집은 카드의 색상이 같은가
   const firstBackColor = clicked[0].querySelector(".card-back").style.backgroundColor;
   const secondBackColor = clicked[1].querySelector(".card-back").style.backgroundColor;
-  if(firstBackColor === secondBackColor){ // 선택한 두 카드가 같은 카드면
+  if(firstBackColor === secondBackColor){ // 카드 2장이 같으면
     // completed = completed.concat(clicked);
     completed.push(clicked[0]);
     completed.push(clicked[1]);
@@ -66,10 +69,12 @@ const onClickCard = (e) => {
     }
   } else {
     // 카드 다시 뒤집기
+    clickable = false; // 카드 2장 뽑으면 클릭 막기
     setTimeout(() => {
       clicked[0].classList.remove("flipped");
       clicked[1].classList.remove("flipped");
       clicked = []; // 초기화
+      clickable = true;
     }, 500);
   }
 };
